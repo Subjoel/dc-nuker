@@ -127,7 +127,7 @@ async def main(token: str, guild_id):
 
 
 
-    if choice == "99":
+    if choice == "01":
         
         url = Tools.api("guilds/%s/channels" % guild_id)
         request = req.get(url, headers=headers, proxies=Tools.proxy())
