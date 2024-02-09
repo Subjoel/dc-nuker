@@ -92,5 +92,5 @@ if you're Too lazy to copy and paste the same token every time; create a Session
 
 ## 📸 Screenshots
 
-<img src="Screenshots/Screenshot.png">
+<img src="Screenshots/screenshot.png">
 
