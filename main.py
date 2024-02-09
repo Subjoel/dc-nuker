@@ -96,7 +96,7 @@ async def main(token: str, guild_id):
     menu = """
 > github.com/subjoel/dc-nuker
 
-99. Delete channels, create channels with a name and spam messages!
+69. Delete channels, create channels with a name and spam messages!
 01. Delete All Channels    08. Webhook Spam Guild     15. Change Guild Icon
 02. Delete All Roles       09. Message Spam Guild     16. Remove all emojis
 03. Ban All Members        10. Rename all channels    17. DM all members
