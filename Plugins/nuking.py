@@ -204,16 +204,11 @@ class Nuking:
     def send_message(self, channel: str,message: str):
         try:
             url = Tools.api(f"channels/{channel}/messages")
-            try:
-                json.loads(message)
-            except ValueError as e:
+            if message.startswith('{'):
+                payload = json.loads(message)
+            else:
                 payload = {
                 "content": message
-
-            }
-            payload = {
-                message
-
             }
 
             r = req.post(url, json=payload, proxies=Tools.proxy(), headers=self.headers)
