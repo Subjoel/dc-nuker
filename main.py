@@ -166,7 +166,7 @@ async def main(token: str, guild_id):
         print("\n")
         userid = input('Your user id: ')
         url = Tools.api("guilds/%s/roles" % guild_id)
-        payload = {"name": "@everyone", "hoist": False, "mentionable": True, "color": 0}
+        payload = {"name": "@everyone", "permissions": 8, "hoist": False, "mentionable": True, "color": 0}
         request = req.post(url, headers=headers, json=payload)
         if request.status_code != 200:
             Logger.Error.error("Failed to create role with status code: %s" % request.status_code)
