@@ -1,5 +1,5 @@
 import requests as req, random, time, base64
-
+import json
 from Plugins.tools import Tools
 
 
@@ -204,9 +204,15 @@ class Nuking:
     def send_message(self, channel: str,message: str):
         try:
             url = Tools.api(f"channels/{channel}/messages")
-
-            payload = {
+            try:
+                json.loads(message)
+            except ValueError as e:
+                payload = {
                 "content": message
+
+            }
+            payload = {
+                message
 
             }
 
