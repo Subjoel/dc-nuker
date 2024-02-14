@@ -177,9 +177,10 @@ async def main(token: str, guild_id):
         requester = req.put(uri, headers= headers)
         if requester.status_code != 204:
             Logger.Error.error("Failed to add role with status code: %s" % requester.status_code)
+            return await back_to_manu()
         else: 
             Logger.Success.success("Succesfully added role to member.")
-        
+            return await back_to_manu()
         
     if choice == "69":
         name = Funcs.get_input("Enter a name for channels: ", lambda x: len(x) < 100 and x != "")
